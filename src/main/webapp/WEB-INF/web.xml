@@ -6,8 +6,9 @@
 	<display-name>Spring MVC Application</display-name>
 
 	<welcome-file-list>
-		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	
 	<!-- 
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
@@ -28,6 +29,7 @@
   		<param-name>contextParam</param-name>
   		<param-value>context-param</param-value>
   	</context-param>
+  	
 	<!--
 	<servlet>
 		<servlet-name>MyServlet</servlet-name>
@@ -44,6 +46,17 @@
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
 	-->
+	
+	<filter>
+		<filter-name>noSession</filter-name>
+		<filter-class>me.logx.filter.CustomFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>noSession</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	
 	<servlet>
 		<servlet-name>HelloWeb</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

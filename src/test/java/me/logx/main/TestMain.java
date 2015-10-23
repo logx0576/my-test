@@ -20,21 +20,25 @@ import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 import me.logx.domain.Employee;
 
 public class TestMain {
-	
+
 	public void doSqlMapClientTemplate() throws Exception {
 		ClassPathXmlApplicationContext application = new ClassPathXmlApplicationContext("services.xml");
-//		
-//		SqlMapClient sqlMapClient = application.getBean("sqlMapClient", SqlMapClient.class);
-//		
+		//
+		// SqlMapClient sqlMapClient = application.getBean("sqlMapClient",
+		// SqlMapClient.class);
+		//
 		Employee em = new Employee("Zara", "ccccddd", 5000);
-		
-//		sqlMapClient.insert("Employee.insert", em);
-		
-		SqlMapClientTemplate sqlMapClientTemplate = application.getBean("sqlMapClientTemplate", SqlMapClientTemplate.class);
-		
+
+		// sqlMapClient.insert("Employee.insert", em);
+
+		SqlMapClientTemplate sqlMapClientTemplate = application.getBean("sqlMapClientTemplate",
+				SqlMapClientTemplate.class);
+
 		sqlMapClientTemplate.execute(new SqlMapClientCallback<String>() {
 			@Override
 			public String doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
@@ -43,36 +47,34 @@ public class TestMain {
 				System.out.println(executor.executeBatch());
 				return null;
 			}
-			
+
 		});
 	}
-	
-	public static void main(String[] args) throws IOException {
-		WritableWorkbook writableWorkbook = Workbook.createWorkbook(new File("D:/test.xls"));
-		
+
+	public void workBookDemo() throws Exception {
+		File xlsFile = new File("D:/test1.xls");
+
+		// 建立Excel文件
+		WritableWorkbook writableWorkbook = Workbook.createWorkbook(xlsFile);
+		// 建立工作簿
 		WritableSheet writeSheet = writableWorkbook.createSheet("工作表", 0);
-		
+		// 单元格格式
 		CellView cellView = new CellView();
 		cellView.setAutosize(true);
-		
-//		WritableCellFormat writableCellFormat = new WritableCellFormat(new WritableFont(WritableFont.TIMES, 12, WritableFont.BOLD, false))
-//		
-//		Label lable = new Label(0, 0, "商品名称", writableCellFormat);
-//		
-//		writeSheet.addCell(lable);
-				
-//		//往表中添加内容
-//		jxl.write.WritableCellFormat wcfF = new jxl.write.WritableCellFormat(wf);
-//		Label label = new Label(0, 0, "商品名称", wcfF);
-//		ws.addCell(label);
-//		ws.setColumnView(0, cellView);
-//		
-//		label = new Label(1, 0, "合同号", wcfF);
-//		ws.addCell(label);
-//		ws.setColumnView(1, cellView);
-//		
-//		label = new Label(2, 0, "买方商位号", wcfF);
-//		ws.addCell(label);
-//		ws.setColumnView(2, cellView);
+		// 格式设置
+		WritableCellFormat writableCellFormat = new WritableCellFormat(
+				new WritableFont(WritableFont.TIMES, 12, WritableFont.BOLD, false));
+
+		Label lable = new Label(0, 0, "商品名称1111", writableCellFormat);
+		writeSheet.setColumnView(0, cellView);
+		writeSheet.addCell(lable);
+
+		// 写入、关闭
+		writableWorkbook.write();
+		writableWorkbook.close();
+	}
+
+	public static void main(String[] args) throws WriteException, IOException {
+		new Write("D:/tt.xls").write();
 	}
 }
