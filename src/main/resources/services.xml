@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<import resource="dao.xml" />
+
+	<context:component-scan base-package="me.logx.bean.scan" />
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath*:server.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="maxWait" value="${jdbc.maxWait}" />
+		<property name="testWhileIdle" value="true" />
+		<property name="validationQuery" value="select 1" />
+		<property name="defaultAutoCommit" value="true" />
+	</bean>
+
+	<!--
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/testdb" />
+		<property name="username" value="root" />
+		<property name="password" value="0702" />
+		<property name="maxActive" value="20" />
+		<property name="maxWait" value="1000" />
+		<property name="testWhileIdle" value="true" />
+		<property name="validationQuery" value="select 1" />
+		<property name="defaultAutoCommit" value="true" />
+	</bean>
+	-->
+
+	<!-- ↓ ibaits begin -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:SqlMapConfig.xml</value>
+		</property>
+		<property name="mappingLocations">
+			<list>
+				<value>classpath:Employee.xml</value>
+			</list>
+		</property>
+		<property name="dataSource" ref="dataSource" />
+		<property name="useTransactionAwareDataSource">
+			<value>false</value>
+		</property>
+	</bean>
+	
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="dataSource" ref="dataSource" />
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	<!-- ↑ ibatis end -->
+	
+	<!-- ↓ 事务管理 begin -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager" ref="transactionManager" />
+	</bean>
+	<!-- ↑ 事务管理 end -->
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- services -->
+	<bean id="pet" class="me.logx.bean.Pet" lazy-init="false">
+		<property name="petAge" value="10" />
+		<property name="petName" value="kitt" />
+	</bean>
+
+	<bean id="normalBeanInterceptor" class="me.logx.interceptor.NormalBeanInterceptor" />
+
+	<bean id="normalBean" class="me.logx.bean.impl.NormalBeanImpl" />
+
+	<bean id="proxyBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>me.logx.bean.NormalBean</value>
+		</property>
+		<property name="target" ref="normalBean">
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>normalBeanInterceptor</value>
+			</list>
+		</property>
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+
+	<bean id="invokeBean" class="me.logx.bean.impl.InvokeBean">
+		<property name="normalBean" ref="proxyBean" />
+	</bean>
+</beans>

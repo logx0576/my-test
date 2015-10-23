@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Employee">
+	<insert id="insert" parameterClass="me.logx.domain.Employee">
+		insert into EMPLOYEE(first_name, last_name, salary)
+		values
+		(#first_name#, #last_name#, #salary#)
+		<selectKey resultClass="int" keyProperty="id">
+			select
+			last_insert_id() as id
+		</selectKey>
+	</insert>
+
+	<select id="getAll" resultClass="me.logx.domain.Employee">
+		SELECT * FROM EMPLOYEE
+	</select>
+
+	<update id="update" parameterClass="me.logx.domain.Employee">
+		UPDATE EMPLOYEE
+		SET first_name = #first_name#
+		WHERE id = #id#
+	</update>
+	
+	<delete id="delete" parameterClass="int">
+      DELETE FROM EMPLOYEE
+      WHERE  id = #id#
+   </delete>
+   
+    <!-- Using ResultMap -->
+   <resultMap id="result" class="me.logx.domain.Employee">
+      <result property="id" column="id"/>
+      <result property="first_name" column="first_name"/>
+      <result property="last_name" column="last_name"/>
+      <result property="salary" column="salary"/>
+   </resultMap> 
+	
+   <select id="useResultMap" resultMap="result">
+      SELECT * FROM EMPLOYEE
+      WHERE id=#id#
+   </select>
+</sqlMap>
