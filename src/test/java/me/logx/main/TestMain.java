@@ -55,11 +55,11 @@ public class TestMain {
 		CellView cellView = new CellView();
 		cellView.setAutosize(true);
 		
-		WritableCellFormat writableCellFormat = new WritableCellFormat(new WritableFont(WritableFont.TIMES, 12, WritableFont.BOLD, false))
-		
-		Label lable = new Label(0, 0, "商品名称", writableCellFormat);
-		
-		writeSheet.addCell(lable);
+//		WritableCellFormat writableCellFormat = new WritableCellFormat(new WritableFont(WritableFont.TIMES, 12, WritableFont.BOLD, false))
+//		
+//		Label lable = new Label(0, 0, "商品名称", writableCellFormat);
+//		
+//		writeSheet.addCell(lable);
 				
 //		//往表中添加内容
 //		jxl.write.WritableCellFormat wcfF = new jxl.write.WritableCellFormat(wf);
