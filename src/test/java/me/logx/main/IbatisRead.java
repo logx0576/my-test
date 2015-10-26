@@ -12,7 +12,7 @@ import java.util.*;
 
 public class IbatisRead {
 	public static void main(String[] args) throws IOException, SQLException {
-		Reader rd = Resources.getResourceAsReader("SqlMapConfig.xml");
+		Reader rd = Resources.getResourceAsReader("SqlMapConfig_backup.xml");
 		SqlMapClient smc = SqlMapClientBuilder.buildSqlMapClient(rd);
 
 		/* This would read all records from the Employee table. */

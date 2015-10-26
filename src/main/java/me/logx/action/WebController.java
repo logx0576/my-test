@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class WebController {
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String index(@ModelAttribute String nn, HttpServletRequest request) {
+	public String index(@ModelAttribute String nn, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("nn... " + nn);
 		
 		if(request != null) {
@@ -29,6 +29,8 @@ public class WebController {
 		for (int i = 0; i < cookies.length; i++) {
 			System.out.println("cookie " + cookies[i].getName() + " " + cookies[i].getValue());
 		}
+		
+		response.addCookie(new Cookie("cookie11", "value11"));
 		return "index";
 	}
 
