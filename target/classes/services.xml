@@ -107,4 +107,9 @@
 	<bean id="invokeBean" class="me.logx.bean.impl.InvokeBean">
 		<property name="normalBean" ref="proxyBean" />
 	</bean>
+	
+	<bean id="remoteUserService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<property name="serviceUrl" value="http://127.0.0.1:8089/remoting/hessianBean.hessian" />
+		<property name="serviceInterface" value="me.logx.bean.HessianBean" />
+	</bean>
 </beans>

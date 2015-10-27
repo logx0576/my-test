@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
+import com.caucho.hessian.client.HessianProxyFactory;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 
@@ -22,59 +24,75 @@ import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
+import me.logx.bean.HessianBean;
 import me.logx.domain.Employee;
 
 public class TestMain {
 
 	public void doSqlMapClientTemplate() throws Exception {
 		ClassPathXmlApplicationContext application = new ClassPathXmlApplicationContext("services.xml");
+		HessianBean h = application.getBean("remoteUserService", HessianBean.class);
+		h.hessianPrint();
 		//
 		// SqlMapClient sqlMapClient = application.getBean("sqlMapClient",
 		// SqlMapClient.class);
 		//
-		Employee em = new Employee("Zara", "ccccddd", 5000);
+//		Employee em = new Employee("Zara", "ccccddd", 5000);
 
 		// sqlMapClient.insert("Employee.insert", em);
 
-		SqlMapClientTemplate sqlMapClientTemplate = application.getBean("sqlMapClientTemplate",
-				SqlMapClientTemplate.class);
-
-		sqlMapClientTemplate.execute(new SqlMapClientCallback<String>() {
-			@Override
-			public String doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
-				executor.startBatch();
-				executor.insert("Employee.insert", em);
-				System.out.println(executor.executeBatch());
-				return null;
-			}
-
-		});
+//		SqlMapClientTemplate sqlMapClientTemplate = application.getBean("sqlMapClientTemplate",
+//				SqlMapClientTemplate.class);
+//
+//		sqlMapClientTemplate.execute(new SqlMapClientCallback<String>() {
+//			@Override
+//			public String doInSqlMapClient(SqlMapExecutor executor) throws SQLException {
+//				executor.startBatch();
+//				executor.insert("Employee.insert", em);
+//				System.out.println(executor.executeBatch());
+//				return null;
+//			}
+//
+//		});
+		
 	}
 
 	public void workBookDemo() throws Exception {
 		File xlsFile = new File("D:/test1.xls");
 
-		// ½¨Á¢ExcelÎÄ¼þ
+		// ï¿½ï¿½ï¿½ï¿½Excelï¿½Ä¼ï¿½
 		WritableWorkbook writableWorkbook = Workbook.createWorkbook(xlsFile);
-		// ½¨Á¢¹¤×÷²¾
-		WritableSheet writeSheet = writableWorkbook.createSheet("¹¤×÷±í", 0);
-		// µ¥Ôª¸ñ¸ñÊ½
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		WritableSheet writeSheet = writableWorkbook.createSheet("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", 0);
+		// ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ê½
 		CellView cellView = new CellView();
 		cellView.setAutosize(true);
-		// ¸ñÊ½ÉèÖÃ
+		// ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½
 		WritableCellFormat writableCellFormat = new WritableCellFormat(
 				new WritableFont(WritableFont.TIMES, 12, WritableFont.BOLD, false));
 
-		Label lable = new Label(0, 0, "ÉÌÆ·Ãû³Æ1111", writableCellFormat);
+		Label lable = new Label(0, 0, "ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½1111", writableCellFormat);
 		writeSheet.setColumnView(0, cellView);
 		writeSheet.addCell(lable);
 
-		// Ð´Èë¡¢¹Ø±Õ
+		// Ð´ï¿½ë¡¢ï¿½Ø±ï¿½
 		writableWorkbook.write();
 		writableWorkbook.close();
 	}
 
 	public static void main(String[] args) throws WriteException, IOException {
-		new Write("D:/tt.xls").write();
+//		new Write("D:/tt.xls").write();
+		ClassPathXmlApplicationContext application = new ClassPathXmlApplicationContext("services.xml");
+//		HessianBean h = application.getBean("remoteUserService", HessianBean.class);
+//		h.hessianPrint();
+		
+		String url = "http://127.0.0.1:8089/remoting/hessianBean.hessian";  
+	       HessianProxyFactory factory = new HessianProxyFactory();  
+	       HessianBean math = null;  
+	       try {  
+	          math = (HessianBean)factory.create(HessianBean.class, url);  
+	          math.hessianPrint();
+	       } catch (MalformedURLException e) {  
+	       }  
 	}
 }
