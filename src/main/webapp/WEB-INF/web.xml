@@ -62,6 +62,7 @@
 	</servlet-mapping>
 	-->
 	
+	<!--
 	<filter>
 		<filter-name>noSession</filter-name>
 		<filter-class>me.logx.filter.CustomFilter</filter-class>
@@ -71,6 +72,7 @@
 		<filter-name>noSession</filter-name>
 		<url-pattern>*.htm</url-pattern>
 	</filter-mapping>
+	-->
 	
 	<servlet>
 		<servlet-name>HelloWeb</servlet-name>
@@ -85,6 +87,11 @@
 	<servlet-mapping>
 		<servlet-name>HelloWeb</servlet-name>
 		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>HelloWeb</servlet-name>
+		<url-pattern>*.hessian</url-pattern>
 	</servlet-mapping>
 
 	<context-param>
