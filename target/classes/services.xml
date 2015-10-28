@@ -29,21 +29,6 @@
 		<property name="defaultAutoCommit" value="true" />
 	</bean>
 
-	<!--
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/testdb" />
-		<property name="username" value="root" />
-		<property name="password" value="0702" />
-		<property name="maxActive" value="20" />
-		<property name="maxWait" value="1000" />
-		<property name="testWhileIdle" value="true" />
-		<property name="validationQuery" value="select 1" />
-		<property name="defaultAutoCommit" value="true" />
-	</bean>
-	-->
-
 	<!-- ↓ ibaits begin -->
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation">
@@ -59,13 +44,13 @@
 			<value>false</value>
 		</property>
 	</bean>
-	
+
 	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
 		<property name="dataSource" ref="dataSource" />
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	<!-- ↑ ibatis end -->
-	
+
 	<!-- ↓ 事务管理 begin -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
@@ -107,9 +92,17 @@
 	<bean id="invokeBean" class="me.logx.bean.impl.InvokeBean">
 		<property name="normalBean" ref="proxyBean" />
 	</bean>
-	
+
 	<bean id="remoteUserService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="http://127.0.0.1:8089/remoting/hessianBean.hessian" />
 		<property name="serviceInterface" value="me.logx.bean.HessianBean" />
+	</bean>
+
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>message_zh_CN</value>
+			</list>
+		</property>
 	</bean>
 </beans>
