@@ -21,7 +21,7 @@ public class CustomFilter extends GenericFilterBean implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// request.setAttribute("nn", "heihei");
+		request.setAttribute("nn", "heihei");
 		System.out.println("enter into custom filter..");
 		chain.doFilter(request, response);
 	}
