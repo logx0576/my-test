@@ -53,7 +53,7 @@
 		<servlet-name>HelloWeb</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
-
+	
 	<servlet-mapping>
 		<servlet-name>HelloWeb</servlet-name>
 		<url-pattern>*.hessian</url-pattern>

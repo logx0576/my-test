@@ -19,7 +19,7 @@ $(document).ready(function() {
 <form class="cmxform" id="fileForm" method="post" action="">
 	<fieldset>
 		<p>
-			<label for="file2">选择任何图像文件</label>
+			<label for="file2">选择任何图像文件1111</label>
 			<input type="file" id="file2" name="file2" class="required" accept="image/*"/>
 		</p>
 		
