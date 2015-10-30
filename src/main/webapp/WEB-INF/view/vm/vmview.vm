@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>jQuery Validate ²å¼ş - ÎÄ¼şÊäÈë¿ò</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>jQuery Validate æ’ä»¶ - æ–‡ä»¶è¾“å…¥æ¡†</title>
 
 <script src="scripts/jquery.validate.js"></script>
 <script src="scripts/jquery-1.7.2.min.js"></script>
@@ -19,12 +19,12 @@ $(document).ready(function() {
 <form class="cmxform" id="fileForm" method="post" action="">
 	<fieldset>
 		<p>
-			<label for="file2">Ñ¡ÔñÈÎºÎÍ¼ÏñÎÄ¼ş1111</label>
+			<label for="file2">é€‰æ‹©ä»»ä½•å›¾$$$</label>
 			<input type="file" id="file2" name="file2" class="required" accept="image/*"/>
 		</p>
 		
 		<p>
-			<input class="submit" type="submit" value="Ìá½»"/>
+			<input class="submit" type="submit" value="æäº¤"/>
 		</p>
 	</fieldset>
 </form>

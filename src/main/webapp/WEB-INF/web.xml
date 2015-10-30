@@ -13,6 +13,7 @@
 		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
 	<!-- encoding filter -->
+	<!--
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -26,7 +27,7 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	-->
 	<context-param>
 		<param-name>contextParam</param-name>
 		<param-value>context-param</param-value>
@@ -53,7 +54,7 @@
 		<servlet-name>HelloWeb</servlet-name>
 		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>HelloWeb</servlet-name>
 		<url-pattern>*.hessian</url-pattern>
@@ -67,8 +68,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
-
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
 	<security-constraint>
 		<web-resource-collection>
 			<!-- Required Field -->

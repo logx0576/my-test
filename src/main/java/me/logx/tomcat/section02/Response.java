@@ -27,6 +27,7 @@ public class Response implements ServletResponse {
 
 	/* This method is used to serve a static page */
 	public void sendStaticResource() throws IOException {
+		System.out.println("WEB_ROOT: " + Constants.WEB_ROOT);
 		byte[] bytes = new byte[BUFFER_SIZE];
 		FileInputStream fis = null;
 		try {

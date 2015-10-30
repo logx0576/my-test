@@ -42,6 +42,8 @@ public class ServletProcessor1 {
 		Servlet servlet = null;
 
 		try {
+			System.out.println("$$ " + Servlet.class.getClassLoader());
+			System.out.println("$$ " + myClass.getClassLoader());
 			servlet = (Servlet) myClass.newInstance();
 			servlet.service((ServletRequest) request, (ServletResponse) response);
 		} catch (Exception e) {

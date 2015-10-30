@@ -33,7 +33,7 @@ public class TestMain {
 
 		SqlMapClient sqlMapClient = application.getBean("sqlMapClient", SqlMapClient.class);
 
-		Employee em = new Employee("Zara", "ccccddd", 5000);
+		final Employee em = new Employee("Zara", "ccccddd", 5000);
 
 		sqlMapClient.insert("Employee.insert", em);
 
