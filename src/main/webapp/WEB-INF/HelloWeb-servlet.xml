@@ -12,12 +12,13 @@
 	<context:component-scan base-package="me.logx.action" />
 
 	<context:component-scan base-package="me.logx.service.impl" />
-	
+
 	<!-- Velocity ↓ -->
 	<bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="resourceLoaderPath">
 			<value>WEB-INF/view/vm</value>
 		</property>
+		<!-- <property name="configLocation" value="/WEB-INF/velocity.properties"/> -->
 		<property name="velocityProperties">
 			<props>
 				<prop key="input.encoding">gbk</prop>
@@ -28,10 +29,25 @@
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.velocity.VelocityView" />
+		<property name="prefix" value="" />
 		<property name="suffix" value=".vm" />
 	</bean>
 	<!-- Velocity ↑ -->
 
+	
+	<!-- 也可以把ResourceBundle或XML文件配置到视图解析器中。如果你需要根据Locale来解析不同的视图，就需要使用resource bundle解析器。 -->
+	<!-- 
+	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
+	</bean>
+	
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="cache" value="true" />
+		<property name="prefix" value="" />
+		<property name="suffix" value=".ftl" />
+	</bean>
+	-->
+	
 	<!-- ViewResolver -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
@@ -40,7 +56,11 @@
 	</bean>
 
 	<!-- File Upload Resolver -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="10485760" />
+	<!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> <property name="maxUploadSize" value="10485760000" 
+		/> </bean> -->
+	<bean id="multipartResolver" class="me.logx.action.CustomMultipartResolver">
+		<property name="maxUploadSize" value="10485760000" />
 	</bean>
+
+
 </beans>

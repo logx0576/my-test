@@ -73,20 +73,21 @@ public class TestMain {
 	public static void main(String[] args) throws WriteException, IOException {
 		// new Write("D:/tt.xls").write();
 
-		String url = "http://127.0.0.1:8089/remoting/hessianBean.hessian";
-		HessianProxyFactory factory = new HessianProxyFactory();
-		HessianBean math = null;
-		try {
-			math = (HessianBean) factory.create(HessianBean.class, url);
-			System.out.println("hessian " + math.hessianPrint());
-		} catch (MalformedURLException e) {
-		}
-
-		System.out.println("------------");
-
-		ClassPathXmlApplicationContext application = new ClassPathXmlApplicationContext("services.xml");
-		HessianBean h = application.getBean("remoteUserService", HessianBean.class);
-		System.out.println("hessian " + h.hessianPrint());
-		System.out.println("over");
+//		String url = "http://127.0.0.1:8089/remoting/hessianBean.hessian";
+//		HessianProxyFactory factory = new HessianProxyFactory();
+//		HessianBean math = null;
+//		try {
+//			math = (HessianBean) factory.create(HessianBean.class, url);
+//			System.out.println("hessian " + math.hessianPrint());
+//		} catch (MalformedURLException e) {
+//		}
+//
+//		System.out.println("------------");
+//
+//		ClassPathXmlApplicationContext application = new ClassPathXmlApplicationContext("services.xml");
+//		HessianBean h = application.getBean("remoteUserService", HessianBean.class);
+//		System.out.println("hessian " + h.hessianPrint());
+//		System.out.println("over");
+		System.out.println(System.getProperty("java.library.path"));
 	}
 }

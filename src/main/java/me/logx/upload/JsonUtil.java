@@ -188,7 +188,6 @@ public class JsonUtil {
 		JSONObject json;
 		json = JSONObject.fromObject(javaObj);
 		return json.toString();
-
 	}
 
 	public static String getJsonString4JavaArray(Object[] objects) {

@@ -39,7 +39,6 @@ public class SerializableMain {
 		}
 	}
 	
-	
 	public static void main(String[] args) {
 //		objectToFile();
 		fileToObject();

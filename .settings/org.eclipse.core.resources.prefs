@@ -1,7 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/main/java/me/logx/httpclient/HttpClientMain.java=UTF-8
 encoding//src/main/java/me/logx/sercurity/SecurityManagerTest.java=UTF-8
 encoding//src/main/webapp/WEB-INF/index.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/view/upload/schedule.jsp=UTF-8
+encoding//src/main/webapp/test.jsp=UTF-8
+encoding//src/test/java/me/logx/main/Main.java=UTF-8
 encoding//src/test/java/me/logx/main/TestMain.java=UTF-8
 encoding/<project>=UTF-8
-separateDerivedEncodings=true
