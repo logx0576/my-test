@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ExampleForIE {
 	public static void main(String[] args) {
-		 System.setProperty("webdriver.ie.driver", "C:/Program Files/Internet Explorer/iexplore.exe");
+		 System.setProperty("webdriver.ie.driver", "D:/Develop/IE/IEDriverServer.exe");
 		 
 		WebDriver driver = new InternetExplorerDriver();
 
