@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ExampleForChrome2 {
+public class ExampleForChrome {
 	public static void main(String[] args) throws IOException {
 		// 设置 chrome 的路径
 		System.setProperty("webdriver.chrome.driver", "D:/Develop/Chrome/chromedriver.exe");
