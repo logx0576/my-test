@@ -66,16 +66,16 @@ public class ResponseFacade implements ServletResponse {
 		response.setLocale(locale);
 	}
 
-	@Override
-	public String getContentType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setCharacterEncoding(String arg0) {
-		// TODO Auto-generated method stub
-
-	}
+//	@Override
+//	public String getContentType() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void setCharacterEncoding(String arg0) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 }
