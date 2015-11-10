@@ -1,4 +1,4 @@
-package me.logx.webcollector;
+package me.logx.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -1,21 +1,17 @@
-package me.logx.webcollector;
-
-import java.io.IOException;
+package me.logx.selenium;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ExampleForChrome {
-	public static void main(String[] args) throws IOException {
-		// 设置 chrome 的路径
-		System.setProperty("webdriver.chrome.driver", "D:/Develop/Chrome/chromedriver.exe");
-		// 创建一个 ChromeDriver 的接口，用于连接 Chrome
-		// 创建一个 Chrome 的浏览器实例
-		WebDriver driver = new ChromeDriver();
+public class ExampleForIE {
+	public static void main(String[] args) {
+		 System.setProperty("webdriver.ie.driver", "D:/Develop/IE/IEDriverServer.exe");
+		 
+		WebDriver driver = new InternetExplorerDriver();
 
 		// 让浏览器访问 Baidu
 		driver.get("http://www.baidu.com");
@@ -37,7 +33,7 @@ public class ExampleForChrome {
 		// 通过判断 title 内容等待搜索页面加载完毕，Timeout 设置10秒
 		(new WebDriverWait(driver, 10)).until(new ExpectedCondition<Boolean>() {
 			public Boolean apply(WebDriver d) {
-				return d.getTitle().toLowerCase().startsWith("ztree");
+				return d.getTitle().toLowerCase().endsWith("ztree");
 			}
 		});
 
@@ -46,12 +42,5 @@ public class ExampleForChrome {
 
 		// 关闭浏览器
 		driver.quit();
-
-		// element = driver.findElement(By.id("kw"));
-		// // element.clear();
-		// element.click();
-		// element.clear();
-		// element.sendKeys("zTree");
-		// element.submit();
 	}
 }
