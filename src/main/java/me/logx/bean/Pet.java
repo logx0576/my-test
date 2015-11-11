@@ -1,9 +1,11 @@
 package me.logx.bean;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class Pet implements DisposableBean, InitializingBean {
+public class Pet implements DisposableBean, InitializingBean, Serializable {
 
 	private int petAge;
 
